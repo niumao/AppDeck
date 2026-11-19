@@ -45,25 +45,11 @@ CREATE TABLE IF NOT EXISTS app_categories (
 -- 服务器数据版本表
 CREATE TABLE IF NOT EXISTS version (
   id INT PRIMARY KEY DEFAULT 1 COMMENT '固定ID=1',
-  version INT NOT NULL DEFAULT 1 COMMENT '数据版本号',
+  version VARCHAR(20) NOT NULL DEFAULT '2512.31.1' COMMENT '数据版本号(格式: YYMM.DD.x)',
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='服务器数据版本表';
 
--- 客户端包版本表
-CREATE TABLE IF NOT EXISTS client_package (
-  id INT PRIMARY KEY DEFAULT 1 COMMENT '固定ID=1',
-  package_version INT NOT NULL DEFAULT 0 COMMENT '客户端包版本号',
-  db_version INT NOT NULL DEFAULT 0 COMMENT '包含的数据版本号',
-  generated_at TIMESTAMP NULL COMMENT '生成时间',
-  db_size BIGINT DEFAULT 0 COMMENT '数据库文件大小(字节)',
-  resources_size BIGINT DEFAULT 0 COMMENT '资源包大小(字节)',
-  status ENUM('none', 'generating', 'ready', 'error') DEFAULT 'none' COMMENT '生成状态'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='客户端包版本表';
-
 -- 初始化版本表
-INSERT INTO version (id, version) VALUES (1, 1) ON DUPLICATE KEY UPDATE id=id;
-
--- 初始化客户端包表
-INSERT INTO client_package (id) VALUES (1) ON DUPLICATE KEY UPDATE id=id;
+INSERT INTO version (id, version) VALUES (1, '2512.31.1') ON DUPLICATE KEY UPDATE id=id;
 
 

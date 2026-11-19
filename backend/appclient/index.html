@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppDeck2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <div id="topNav" class="top-nav">
+        <button class="logo-badge" id="logoBadge">
+            <span class="logo-text">且玩游戏</span>
+        </button>
+
+        <div class="nav-tabs">
+            <button class="nav-tab" data-page="home">首页</button>
+            <button class="nav-tab" data-page="library">游戏库</button>
+            <button class="nav-tab" data-page="rankings">排行榜</button>
+        </div>
+
+        <div class="user-icon" id="userIcon"></div>
+    </div>
+
+    <!-- Page Container -->
+    <div id="pageContainer" class="page-container"></div>
+
+    <!-- App Detail Modal -->
+    <div id="appModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <div id="appModalContent" class="app-modal-content"></div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-card update-modal-card">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <h2 class="modal-title">About AppDeck2</h2>
+            <p class="modal-text" id="aboutModalContent">
+                AppDeck2 Game Library Client<br>
+                Version: <span id="appVersion">1.0.0</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Screensaver Overlay -->
+    <div id="screensaverOverlay" class="screensaver-overlay">
+        <video id="screensaverVideo" playsinline></video>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Save Sync Status (persistent, updated in place while restoring) -->
+    <div id="saveSyncStatus" class="save-sync-status" style="display:none;">
+        <span class="save-sync-spinner"></span>
+        <span id="saveSyncStatusText"></span>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+</html>

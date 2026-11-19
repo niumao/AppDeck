@@ -9,12 +9,14 @@ import (
 )
 
 type StatsHandler struct {
-	appService *services.AppService
+	appService              *services.AppService
+	registeredDeviceService *services.RegisteredDeviceService
 }
 
 func NewStatsHandler() *StatsHandler {
 	return &StatsHandler{
-		appService: services.NewAppService(),
+		appService:              services.NewAppService(),
+		registeredDeviceService: services.GetRegisteredDeviceService(),
 	}
 }
 
@@ -28,7 +30,8 @@ type ClickData struct {
 // POST /api/v1/stats/clicks
 func (h *StatsHandler) UploadClicks(c *gin.Context) {
 	var req struct {
-		Clicks []ClickData `json:"clicks" binding:"required"`
+		MachineCode string      `json:"machineCode"`
+		Clicks      []ClickData `json:"clicks" binding:"required"`
 	}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -38,6 +41,11 @@ func (h *StatsHandler) UploadClicks(c *gin.Context) {
 			"error":   err.Error(),
 		})
 		return
+	}
+
+	tenantID := ""
+	if req.MachineCode != "" {
+		tenantID = h.registeredDeviceService.GetTenantIDByMachineCode(req.MachineCode)
 	}
 
 	// 批量更新点击统计
@@ -50,6 +58,17 @@ func (h *StatsHandler) UploadClicks(c *gin.Context) {
 			})
 			return
 		}
+
+		if tenantID != "" {
+			if err := h.appService.UpdateTenantClickCount(tenantID, click.AppID, click.Count); err != nil {
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"code":    500,
+					"message": "更新地区点击统计失败",
+					"error":   err.Error(),
+				})
+				return
+			}
+		}
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -57,5 +76,3 @@ func (h *StatsHandler) UploadClicks(c *gin.Context) {
 		"message": "上报成功",
 	})
 }
-
-

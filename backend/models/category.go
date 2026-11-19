@@ -7,7 +7,7 @@ import (
 // Category 分类模型
 type Category struct {
 	ID        string    `gorm:"column:id;primaryKey" json:"id"`
-	Name      string    `gorm:"column:name;not null;uniqueIndex" json:"name"`
+	Name      string    `gorm:"column:name;type:varchar(100);not null;uniqueIndex" json:"name"`
 	OrderNum  int       `gorm:"column:order_num;default:0" json:"order"`
 	CreatedAt time.Time `gorm:"column:created_at" json:"createdAt"`
 	UpdatedAt time.Time `gorm:"column:updated_at" json:"updatedAt"`

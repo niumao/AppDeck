@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0a1628">
+
+    <!-- Status bar -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="已连接电视"
+        android:textColor="#5b9bd5"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
+
+    <!-- Controls row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
+
+        <!-- Touchpad area (55% width) -->
+        <FrameLayout
+            android:id="@+id/touchpadArea"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="55"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/touchpad_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="触控板\n滑动浏览 · 点击选择"
+                android:textColor="#5b9bd5"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:alpha="0.6" />
+        </FrameLayout>
+
+        <!-- D-pad area (25% width) -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:layout_marginEnd="12dp">
+
+            <!-- D-pad grid using RelativeLayout for centering -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <!-- Center anchor -->
+                <View
+                    android:id="@+id/dpadCenter"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true" />
+
+                <!-- Up -->
+                <Button
+                    android:id="@+id/btnUp"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_above="@id/dpadCenter"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/dpad_btn_bg"
+                    android:text="▲"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <!-- Left -->
+                <Button
+                    android:id="@+id/btnLeft"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/dpadCenter"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/dpad_btn_bg"
+                    android:text="◀"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <!-- Right -->
+                <Button
+                    android:id="@+id/btnRight"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/dpadCenter"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/dpad_btn_bg"
+                    android:text="▶"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <!-- Down -->
+                <Button
+                    android:id="@+id/btnDown"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_below="@id/dpadCenter"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/dpad_btn_bg"
+                    android:text="▼"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </FrameLayout>
+
+        <!-- Action buttons (20% width) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- A button (Enter/Confirm) -->
+            <Button
+                android:id="@+id/btnA"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/action_btn_a_bg"
+                android:text="A"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确认"
+                android:textColor="#4caf50"
+                android:textSize="12sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- B button (Escape/Back) -->
+            <Button
+                android:id="@+id/btnB"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/action_btn_b_bg"
+                android:text="B"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返回"
+                android:textColor="#ff3232"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

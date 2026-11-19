@@ -76,7 +76,8 @@ func (h *CategoriesHandler) GetByID(c *gin.Context) {
 // POST /api/v1/admin/categories
 func (h *CategoriesHandler) Create(c *gin.Context) {
 	var req struct {
-		Name string `json:"name" binding:"required"`
+		Name  string `json:"name" binding:"required"`
+		Order *int   `json:"order"`
 	}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -90,6 +91,10 @@ func (h *CategoriesHandler) Create(c *gin.Context) {
 
 	category := &models.Category{
 		Name: req.Name,
+	}
+
+	if req.Order != nil {
+		category.OrderNum = *req.Order
 	}
 
 	created, err := h.categoryService.Create(category)
@@ -115,7 +120,8 @@ func (h *CategoriesHandler) Update(c *gin.Context) {
 	id := c.Param("id")
 
 	var req struct {
-		Name *string `json:"name"`
+		Name  *string `json:"name"`
+		Order *int    `json:"order"`
 	}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -130,6 +136,9 @@ func (h *CategoriesHandler) Update(c *gin.Context) {
 	updates := make(map[string]interface{})
 	if req.Name != nil {
 		updates["name"] = *req.Name
+	}
+	if req.Order != nil {
+		updates["order_num"] = *req.Order
 	}
 
 	updated, err := h.categoryService.Update(id, updates)
